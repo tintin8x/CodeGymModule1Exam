@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>1.Hàm giải phương trình bậc nhất ax + b = 0</h1>
+    <p>Nhập a: </p><input type="number" id="num1"/>
+    <p>Nhập b: </p><input type="number" id="num2"/>
+    <button onclick="giaiPTBacNhat()">Giải phương trình</button>
+    <p id="res1"></p>
+</div>
+<div>
+    <h1>2.Hàm tìm kiếm trong mảng</h1>
+    <button onclick="taoMangSoNguyen()">Tạo mảng số nguyên bất kỳ</button>
+    <p id="disArr1"></p>
+    <p>Nhập số cần tìm: </p><input type="number" id="num3"/>
+    <button onclick="timTrongMang(c.value, arr1)">Tìm trong mảng</button>
+    <p id="res2"></p>
+</div>
+<div>
+    <h1>3. Tìm số lượng nguyên âm trong mảng</h1>
+    <input type="text" id="inputArr2">
+    <button onclick="addToArr()">Thêm vào mảng</button>
+    <button onclick="disVowelFromArr()">Hiện số ký tự nguyên âm</button>
+    <br><br>
+    <p id="res3"></p>
+</div>
+<div>
+    <h1>4. Xây dựng lớp Animal </h1>
+    <button onclick="hienBai4()">Hiện bài 4</button>
+    <p id="res4"></p>
+</div>
+</body>
+<script>
+    //Bai 1: giai phuong trinh bac nhat
+
+    let res1 = document.getElementById("res1");
+    let a = document.getElementById('num1');
+    let b = document.getElementById('num2');
+
+    //Ham giai phuong trinh bac nhat
+    function giaiPTBacNhat() {
+        let res;
+        if (a.value == 0) {
+            res1.innerHTML = "Phương trình vô nghiệm";
+        } else {
+            res = -b.value / a.value;
+            res1.innerHTML = "Nghiệm của phương trình là: " + res;
+        }
+    }
+
+    //Bai 2: Tìm kiếm trong mảng
+    let disArr1 = document.getElementById("disArr1")
+    let c = document.getElementById('num3');
+    let res2 = document.getElementById("res2")
+    let arr1 = new Array();
+
+    // Tạo mảng số nguyên
+    function taoMangSoNguyen() {
+        let s = "Mảng số nguyên: "
+        for (let i = 0; i < 10; i++) {
+            let a = Math.floor(Math.random() * 50);
+            arr1[i] = a;
+            if (i < 9) {
+                s = s + arr1[i] + ", ";
+            } else {
+                s = s + arr1[i];
+            }
+        }
+        disArr1.innerHTML = s;
+    }
+
+    //Hàm tìm kiếm trả về vị trí số cần tìm trong mảng trong mảng num: số cần tìm, arr: mảng để tìm
+    function timTrongMang(num, arr) {
+        let pos;
+        let s = "Không tìm thấy " + num + " trong mảng";
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] == num) {
+                s = "Tìm thấy " + num + " ở vị trí thứ " + i;
+                break;
+            }
+        }
+
+        res2.innerHTML = s;
+    }
+
+    //3. Tìm số lượng nguyên âm trong mảng
+    let inputArr2 = document.getElementById('inputArr2');
+    let res3 = document.getElementById('res3');
+    let arr2 = new Array();
+    let arr2Index = 0;
+    let vowelArr = ["a", "o", "e", "u", "i"]
+
+    //Hàm thêm vào mảng để tạo mảng
+    function addToArr() {
+        if(inputArr2.value != "") {
+            arr2[arr2Index] = inputArr2.value;
+            res3.innerHTML = "Phần tử: " + arr2[arr2Index] + " thêm vào vị trí " + arr2Index;
+            arr2Index++;
+            inputArr2.value = "";
+        }
+    }
+
+    //Hàm hiển thị số ký tự nguyên âm trong mảng
+    function disVowelFromArr() {
+        let count = 0;
+        let s = "<hr/>" + "Mảng: ";
+
+        for (let i = 0; i < arr2.length; i++) {
+            for (let j = 0; j < vowelArr.length; j++) {
+                if (arr2[i] == vowelArr[j]) {
+                    count++;
+                }
+            }
+            if (i < arr2.length - 1) {
+                s = s + arr2[i] + ", ";
+            } else {
+                s = s + arr2[i];
+            }
+        }
+        res3.innerHTML = s + " có số lượng nguyên âm là: " + count;
+    }
+
+//4. Xây dựng lớp Animal
+    class Animal{
+        name;
+        weight;
+        constructor(name, weight) {
+            this.name = name;
+            this.weight = weight;
+        }
+        setName(name){
+            this.name = name;
+        }
+        setWeight(weight){
+            this.weight = weight;
+        }
+        getName(){
+            return this.name;
+        }
+        getWeight(){
+            return this.weight;
+        }
+        toString(){
+            return "Tên " + this.name + ", cân nặng: " + this.weight + "kg";
+        }
+    }
+
+    let res4 = document.getElementById('res4')
+    function hienBai4(){
+        let s;
+        let objAnimal1 = new Animal();
+        objAnimal1.name = "Elephant";
+        objAnimal1.weight = 45.6;
+        s = objAnimal1.toString();
+        let objAnimal2 = new Animal("Mike", 20);
+        objAnimal2.setName("Mouse");
+        s = s + "<br>"+ objAnimal2.toString()
+
+        res4.innerHTML = s;
+    }
+
+
+</script>
+</html>
